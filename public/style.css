@@ -1,0 +1,14 @@
+
+body{
+    background-color: #efefef;
+}
+.top-footer{
+    background-color: #9162e4;    
+}
+.nav-wrapper{
+    background-color:#5e35b1;
+    
+}
+.card-content, .card .card-reveal{
+    background-color: #bdbdbd; 
+}

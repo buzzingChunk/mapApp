@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html  ng-app="mapApp" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+  <title>Ben Eggert</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.2/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.2/mapbox-gl.css' rel='stylesheet' />
+
+
+  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script><!-- load angular --> 
+
+
+  <script src="index.js"></script>
+</head>
+  <body ng-controller="MainController">
+    <navbar></navbar>
+    
+
+
+  <div class="container" >
+      
+      <h1 class="header center">Benjamin Eggert</h1>
+      <div class="row center">
+          <h5 class="header col s12 light">Hi, My names Ben. I'm a web developer.</h5>
+            <p>Welcome to my website</p>
+      </div>
+
+    
+
+<div class="row">
+  <div class="col s12">
+      <div id='map' style='width: 100%; height: 500px;'></div>
+
+      <style>
+        .marker {
+        background-image: url('mapbox-icon.png');
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .mapboxgl-popup {
+        max-width: 200px;
+      }
+
+      .mapboxgl-popup-content {
+        text-align: center;
+      }
+      </style>
+      <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoiYmVuZWdnZXJ0MjMzIiwiYSI6ImNqYW9za2tqYzNtdHgyd25xcGxmMnRka3QifQ.F48jr7vWLgKXlhYlWRQntQ';
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v9',
+        center: [-96, 37.8],
+        zoom: 1
+      });
+      
+      var geojson = {
+  type: 'FeatureCollection',
+  features: [{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [10.2039, 56.1629]
+    },
+    properties: {
+      title: 'Aarhus, DK',
+      description: 'This is where I studied abroad in 2013.'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.6765, 45.5231]
+    },
+    properties: {
+      title: 'Portland, OR',
+      description: 'This is where Im from!'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [117.3616, 39.3434]
+    },
+    properties: {
+      title: 'Tianjin, China',
+      description: 'This is where I studied abroad in 2012.'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-84.0907, 9.9281]
+    },
+    properties: {
+      title: 'San Jose, Costa Rica',
+      description: 'Traveled here for a week in 2017.'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [139.6917, 35.6895]
+    },
+    properties: {
+      title: 'Tokyo, Japan',
+      description: 'Traveled here for a two weeks in 2016.'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [106.6297, 10.8231]
+    },
+    properties: {
+      title: 'Saigon, Vietnam',
+      description: 'Part of my 3 month journey through SE Asia in 2014.'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [151.2093, -33.8688]
+    },
+    properties: {
+      title: 'Sydney, Australia',
+      description: 'Traveled here for a week in 2014.'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [138.6007, -34.9285]
+    },
+    properties: {
+      title: 'Adelaide, Australia',
+      description: 'Traveled here for a week in 2014.'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [0.1278, 51.5074]
+    },
+    properties: {
+      title: 'London, UK',
+      description: 'Spent 3 weeks here in 2012.'
+    }
+  }]
+};
+
+
+// add markers to map
+geojson.features.forEach(function(marker) {
+
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(el)
+  .setLngLat(marker.geometry.coordinates)
+  .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+  .setHTML('<h5>' + marker.properties.title + '</h5><p>' + marker.properties.description + '</p>'))
+  .addTo(map);
+});
+
+
+      </script>
+  </div>
+
+    
+
+  
+</div>
+
+
+
+    
+  </div>    
+
+  <footer class="page-footer top-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">BuzzingChunk.com</h5>
+          <p class="grey-text text-lighten-4">If you like what you see <a href= "mailto:beneggert233@gmail.com">shoot me an email</a></p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Links</h5>
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="https://www.linkedin.com/in/benjamin-eggert-9a3b6542/">Linkedin</a></li>
+            <li><a class="grey-text text-lighten-3" href="https://www.instagram.com/beneggert233/?hl=en">Instagram</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">Other Profile</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      © 2014 Copyright BuzzingChunk
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  </body>
+  <script>
+    $( document ).ready(function(){
+      $('.button-collapse').sideNav({
+      menuWidth: 300, // Default is 300
+      closeOnClick: true,
+      draggable: true 
+    }
+  );
+    })
+    </script>
+</html>
